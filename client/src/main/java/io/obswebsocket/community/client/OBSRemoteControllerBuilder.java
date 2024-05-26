@@ -18,8 +18,8 @@ public class OBSRemoteControllerBuilder {
   private final OBSCommunicatorBuilder obsCommunicatorBuilder = new OBSCommunicatorBuilder();
   private final LifecycleListenerBuilderFacade lifecycleListenerBuilderFacade = new LifecycleListenerBuilderFacade(
           this,
-          obsCommunicatorBuilder.lifecycle(),
-          controllerLifecycleListenerBuilder
+          this.obsCommunicatorBuilder.lifecycle(),
+          this.controllerLifecycleListenerBuilder
   );
   private OBSCommunicator communicator;
 
@@ -40,7 +40,7 @@ public class OBSRemoteControllerBuilder {
   }
 
   public OBSRemoteControllerBuilder password(String password) {
-    obsCommunicatorBuilder.password(password);
+    this.obsCommunicatorBuilder.password(password);
     return this;
   }
 
@@ -61,7 +61,7 @@ public class OBSRemoteControllerBuilder {
   }
 
   public LifecycleListenerBuilderFacade lifecycle() {
-    return lifecycleListenerBuilderFacade;
+    return this.lifecycleListenerBuilderFacade;
   }
 
   public OBSRemoteControllerBuilder communicator(OBSCommunicator communicator) {
@@ -72,15 +72,15 @@ public class OBSRemoteControllerBuilder {
   public OBSRemoteController build() {
 
     return new OBSRemoteController(
-            webSocketClient,
-            communicator == null
-                    ? obsCommunicatorBuilder.build()
-                    : communicator,
-            controllerLifecycleListenerBuilder.build(),
-            host,
-            port,
-            connectionTimeoutSeconds,
-            autoConnect
+            this.webSocketClient,
+            this.communicator == null
+                    ? this.obsCommunicatorBuilder.build()
+                    : this.communicator,
+            this.controllerLifecycleListenerBuilder.build(),
+            this.host,
+            this.port,
+            this.connectionTimeoutSeconds,
+            this.autoConnect
     );
 
   }
